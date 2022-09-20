@@ -1,0 +1,196 @@
+.App {
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+.title{
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.btn-primary{
+  background-color: var(--primary);
+  padding: 12px;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  border-radius: 2px;
+}
+.spacer{
+  height: 2rem;
+}
+.input-container{
+  display: flex;
+  align-items: center;
+  margin: 12px 0px;
+  width: 100%;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+.input-container~.with-desc{
+  margin: 20px 0px;
+}
+.input-container label{
+  display: inline-flex;
+  flex: 0 0 25%;
+  justify-content: end;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.input-field{
+  display: flex;
+  flex: 1 1 0;
+  position: relative;
+}
+.input-field input{
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  height: 35px;
+  padding: 0px 11px;
+  flex: 1 1 0;
+  border-radius: 3px;
+}
+.input-field input:focus {
+  outline: none !important;
+  border:1px solid var(--primary);
+}
+.input-field .prefix{
+    background-color: var(--grey);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    height: 35px;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    border-radius: 3px 0px 0px 3px;
+}
+.input-field .prefix~input{
+  border-radius: 0px 3px 3px 0px;
+}
+.input-field input::placeholder{
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 12px;
+}
+.input-field .description {
+  position: absolute;
+  font-size: 10px;
+  bottom: -16px;
+  font-weight: 600;
+  color: #ABABAB;
+}
+.content{
+    height: calc(100vh - 61px);
+    width: calc(100vw - 200px);
+    display: flex;
+    flex-direction: column;
+}
+.breadcrumb{
+    display: flex;
+    height: 45px;
+    align-items: center;
+    padding-left: 24px;
+    box-shadow: 0px 3px 5px 0px rgba(161, 161, 161, .1);
+    z-index: 2;
+}
+.breadcrumb li{
+    list-style: none;
+    font-size: 12px;
+}
+.breadcrumb li:nth-last-child(1){
+    color: #ababab;
+}
+.breadcrumb li:nth-last-child(1)::after{
+    content: '';
+}
+.breadcrumb li::after{
+    content: '>';
+    padding: 0px 12px;
+}
+.block{
+  background-color: var(--grey);
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+}
+.card{
+  width: 100%;
+  background-color: var(--white);
+  height: 100%;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+}
+.card-title{
+  font-weight: 700;
+  color: var(--dark-light);
+  padding: 20px;
+  text-align: start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.form{
+  position: relative;
+  width: 700px;
+  flex-direction: column;
+}
+.radio-group{    
+  display: flex;
+  align-items: center;
+  margin: 12px 0px;
+  width: 100%;
+  flex-flow: row wrap;
+}
+.radio-group > label{  
+  display: inline-flex;
+  flex: 0 0 25%;
+  justify-content: end;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.radio-group .radio-items{
+  display: flex;
+  flex-direction: column;
+}
+.radio-group .radio-items .radio-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 4px 0px;
+}
+.radio-item > input{
+  width: 15px;
+  height: 15px;
+}
+.radio-item > label{
+  font-weight: 600;
+  font-size: 12px;
+  padding-left: 6px;
+}
+.file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.file-input::before {
+  content: 'Choose File';
+  display: inline-block;
+  background-color: var(--grey);
+  cursor: pointer;
+  font-size: 10pt;
+  position: absolute;
+  left: 1px;
+  /* border: 1px solid rgba(0, 0, 0, 0.2); */
+  padding: 10px;
+  top: 1px;
+  border-radius: 3px 0px 0px 3px;
+}
+input:required:invalid {
+  border-color: var(--red);
+  border-width: 1px;
+}
+.error-text{
+  font-size: 10px;
+  margin-left: -22%;
+  color: var(--red);
+  padding-bottom: 12px;
+}
