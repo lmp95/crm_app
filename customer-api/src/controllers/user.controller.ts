@@ -21,8 +21,12 @@ const getUserByEmail = async (req: Request, res: Response) => {
 };
 
 const loginUser = async (req: Request, res: Response) => {
-  const result = await authService.loginAuth(req.body.email, req.body.password);
-  res.send(result);
+  try {
+    const result = await authService.loginAuth(req.body.email, req.body.password);
+    res.send(result);
+  } catch (error) {
+    res.status(401).send({ message: 'Invalid email or password.' });
+  }
 };
 
 export const UserController = {

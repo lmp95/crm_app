@@ -4,12 +4,17 @@
 .header{
     height: 60px;
     border-bottom: 1px solid rgba(161, 161, 161, 0.1);
-    width: calc(100vw - 250px);
+    width: calc(100vw - 200px);
     display: block;
     padding: 0px 25px;
     display: flex;
     align-items: center;
     justify-content: end;
+    box-sizing: border-box;
+}
+.user-info{
+    display: flex;
+    background-color: #333333;
 }
 .side-nav{
     width: 200px;

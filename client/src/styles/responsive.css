@@ -1,0 +1,101 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .login-form {
+        width: 250px;
+        padding: 4rem 2rem;
+    }
+
+    .side-nav {
+        /* display: none; */
+        position: absolute;
+        margin-left: -200px;
+        z-index: 99;
+        transition: margin-left .2s ease-in;
+    }
+
+    .side-nav.mobile {
+        margin-left: 0;
+    }
+
+    .header {
+        justify-content: space-between;
+    }
+
+    .header,
+    .content {
+        width: 100vw;
+    }
+
+    .card {
+        height: auto;
+    }
+
+    .form {
+        max-width: 100%;
+        padding: 12px;
+    }
+
+    .input-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-container label,
+    .radio-group>label {
+        justify-content: start;
+        padding: 10px 0px;
+    }
+
+    .radio-group {
+        align-items: flex-start
+    }
+
+    .data-footer p {
+        font-size: 10px;
+    }
+
+    .filter-section .date-filter {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .date-filter .input-container {
+        margin: 0;
+    }
+
+    .item-option {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .page-list .pagination-box {
+        padding: 4px 12px;
+        font-size: 10px;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        width: 100%;
+    }
+
+    .error-text {
+        margin-left: 0;
+        padding-bottom: 0;
+        text-align: start;
+    }
+
+    .menu-icon,
+    .close-icon {
+        display: block;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}

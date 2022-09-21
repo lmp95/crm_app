@@ -2,7 +2,12 @@ import { customerService } from '../services';
 import { Request, Response } from 'express';
 
 const getCustomerList = async (req: Request, res: Response) => {
-  const result = await customerService.getCustomers();
+  let page = req.query.page;
+  let limit = req.query.limit;
+  let search = req.query.search;
+  let startDate = req.query.startDate
+  let endDate = req.query.endDate
+  const result = await customerService.getCustomers(page, limit, search, startDate, endDate);
   res.send(result);
 };
 

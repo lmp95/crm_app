@@ -1,19 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getCookie } from '../utils/cookie';
 
 // Define a type for the slice state
 interface UserState {
-  username: string | null,
+  email: string | null,
   role: string | null,
-  isLoggedIn: boolean,
   token: string | null,
 }
 
 // Define the initial state using that type
 const initialState: UserState = {
-    username: null,
-    role: null,
-    isLoggedIn: false,
-    token: null,
+  email: localStorage.getItem('email'),
+  role: localStorage.getItem('role'),
+  token: getCookie('token'),
 };
 
 export const userSlice = createSlice({
@@ -21,15 +20,13 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     assignUser: (state, action: PayloadAction<UserState>) => {
-      state.username = action.payload.username;
+      state.email = action.payload.email;
       state.role = action.payload.role;
-      state.isLoggedIn = true;
       state.token = action.payload.token;
     },
     unassignUser: (state) => {
-      state.username = null;
+      state.email = null;
       state.role = null;
-      state.isLoggedIn = false;
       state.token = null;
     }
   }

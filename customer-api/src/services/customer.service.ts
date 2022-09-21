@@ -6,8 +6,31 @@ import { Customer } from '../models';
  * Get customer list
  * @returns {Promise<CustomerInterface[]>}
  */
-const getCustomers = async (): Promise<CustomerInterface[]> => {
-  return await Customer.find();
+const getCustomers = async (
+  page: any,
+  limit: any,
+  search: any,
+  startDate: any,
+  endDate: any
+): Promise<any> => {
+  let result;
+  if(startDate && startDate.length > 0 && endDate && endDate.length > 0){
+    const dateFilter = { $gte: new Date(startDate), $lte: new Date(new Date(endDate)) }
+    result = await Customer.aggregate([
+      { $match: { createdDate: dateFilter } }
+    ]);
+    return ({ content: result, total: result.length });
+  }
+  if (search && search.length > 0) {
+    const regex = new RegExp(search);
+    result = await Customer.aggregate([
+      { $match: { $or: [{ name: regex }, { phone: regex }, { email: regex }] } }
+    ]);
+    return ({ content: result, total: result.length });
+  }
+  result = await Customer.find().skip(limit * (page - 1)).limit(limit).sort('-createdDate');
+  let total = await Customer.find().count();
+  return ({ content: result, total: total });
 };
 
 /**
@@ -18,7 +41,6 @@ const getCustomers = async (): Promise<CustomerInterface[]> => {
 const createCustomer = async (
   data: CustomerInterface
 ): Promise<CustomerInterface> => {
-  console.log(data);
   data = { ...data, createdDate: new Date(), updatedDate: new Date() };
   return Customer.create(data);
 };

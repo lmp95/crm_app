@@ -3,9 +3,9 @@ export interface CustomerInterface {
   email: string;
   password: string;
   name: string,
-  phone: number,
+  phone: string,
   birthday: Date,
-  NRC: string,
+  nrc: string,
   gender: string,
   createdDate: Date,
   updatedDate: Date

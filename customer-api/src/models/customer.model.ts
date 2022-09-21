@@ -23,14 +23,14 @@ const customerSchema = mongoose.Schema(
       trim: true,
     },
     phone: {
-      type: Number,
+      type: String,
       required: true,
     },
     birthday: {
       type: String,
       required: true,
     },
-    NRC: {
+    nrc: {
       type: String,
       required: true,
     },

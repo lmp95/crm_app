@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import InputField from '../components/InputField';
 import RadioGroup from '../components/RadioGroup';
+import ToastBox from '../components/ToastBox';
 
 const initialState = {
   photo: null,
@@ -15,6 +17,7 @@ const initialState = {
 };
 
 function AddNewCustomer() {
+  const nav = useNavigate();
   const [customerForm, setCustomerForm] = useState({
     photo: '',
     email: '',
@@ -28,11 +31,27 @@ function AddNewCustomer() {
   });
   const [formErrors, setFormErrors] = useState(initialState);
   const [isValid, setIsValid] = useState(false);
-  const onSubmit = () => {
+  const [error, setError] = useState(false);
+  const onSubmit = async () => {
+    setFormErrors(initialState);
     if (isValid) {
-      console.log('Submit');
+      await fetch(`${process.env.REACT_APP_API_BASE_URL}/customer/`, {
+        method: 'POST', headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(customerForm)
+      }).then((response) => {
+        if (!response.ok) { throw new Error('Fail to create customer'); }
+        else return response.json();
+      }).then(() => {
+        nav('/');
+      }).catch(() => {
+        setError(true);
+        setTimeout(() => {
+          setError(false);
+        }, 2000);
+      });
     } else {
-      setFormErrors(initialState);
       for (const key in customerForm) {
         if (`${customerForm[key as keyof typeof customerForm]}`.length <= 0) {
           setFormErrors((formErrors) => ({ ...formErrors, [key]: 'error' }));
@@ -65,7 +84,7 @@ function AddNewCustomer() {
   };
 
   return (
-    <div className='card'>
+    <div className='form-card'>
       <div className='form'>
         <InputField
           name='photo'
@@ -161,6 +180,7 @@ function AddNewCustomer() {
           Sign In
         </button>
       </div>
+      {error && <ToastBox message='Fail to create customer.' />}
     </div>
   );
 }
