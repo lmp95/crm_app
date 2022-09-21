@@ -61,7 +61,7 @@ function CustomerList() {
     let i = 1;
     let page = 1;
     const result = [];
-    while (i < customers.total) {
+    while (i <= customers.total) {
       result.push(page);
       page++;
       i += limit;
