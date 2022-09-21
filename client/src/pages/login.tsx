@@ -7,55 +7,60 @@ import { useNavigate } from 'react-router-dom';
 import { setCookie } from '../utils/cookie';
 import { loginInterface } from '../interface/login.interface';
 import ToastBox from '../components/ToastBox';
-import ModalBox from '../components/Modal';
 
 function Login() {
   const initLoginState: loginInterface = {
     email: null,
-    password: null
+    password: null,
   };
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [formError, setFormError] = useState(initLoginState);
-  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const nav = useNavigate();
+
   const loginHandler = async () => {
-    showModal ? setShowModal(false) : setShowModal(true);
-    // setFormError(initLoginState);
-    // if (email.length > 0 && password.length > 0) {
-    //   await fetch(`${process.env.REACT_APP_API_BASE_URL}/user/login`, {
-    //     method: 'POST', headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({ email: email, password: password })
-    //   }).then((response) => {
-    //     if (!response.ok) { setError(true); throw new Error('Invalid'); }
-    //     else return response.json();
-    //   }).then((result) => {
-    //     dispatch(
-    //       assignUser({
-    //         email: result.email,
-    //         token: result.token,
-    //         role: result.role,
-    //       })
-    //     );
-    //     localStorage.setItem('email', email);
-    //     localStorage.setItem('role', result.role);
-    //     setCookie('token', result.token);
-    //     nav('/');
-    //   }).catch(() => {
-    //     setError(true);
-    //     setTimeout(() => {
-    //       setError(false);
-    //     }, 2000);
-    //   });
-    // }
-    // else {
-    //   email.length <= 0 && setFormError((formError) => ({ ...formError, email: 'error' }));
-    //   password.length <= 0 && setFormError((formError) => ({ ...formError, password: 'error' }));
-    // }
+    setFormError(initLoginState);
+    if (email.length > 0 && password.length > 0) {
+      await fetch(`${process.env.REACT_APP_API_BASE_URL}/user/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            setError(true);
+            throw new Error('Invalid');
+          } else return response.json();
+        })
+        .then((result) => {
+          dispatch(
+            assignUser({
+              email: result.email,
+              token: result.token,
+              role: result.role,
+            })
+          );
+          localStorage.setItem('email', email);
+          localStorage.setItem('role', result.role);
+          setCookie('token', result.token);
+          nav('/');
+        })
+        .catch(() => {
+          setError(true);
+          setTimeout(() => {
+            setError(false);
+          }, 1000);
+        });
+    } else {
+      email.length <= 0 &&
+        setFormError((formError) => ({ ...formError, email: 'error' }));
+      password.length <= 0 &&
+        setFormError((formError) => ({ ...formError, password: 'error' }));
+    }
   };
 
   return (
@@ -86,7 +91,6 @@ function Login() {
           Sign In
         </button>
         {error && <ToastBox message='Invalid email or password.' />}
-        {showModal && <ModalBox message='Invalid email or password.' onClose={loginHandler}/>}
       </div>
     </div>
   );

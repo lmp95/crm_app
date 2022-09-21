@@ -1,12 +1,12 @@
 export interface customerInterface {
-    photo: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
-    name: string,
-    phone: string,
-    birthday: string,
-    nrc: string,
-    gender: string,
-    createdDate: string,
+  photo: string | null;
+  email: string | null;
+  password: string | null;
+  confirmPassword: string | null;
+  name: string | null;
+  phone: string | null;
+  birthday: string | null;
+  nrc: string | null;
+  gender: string | null;
+  createdDate?: string | null;
 }

@@ -89,6 +89,14 @@
     .close-icon {
         display: block;
     }
+    .form-submit-btn{
+        margin: 0;
+        width: 100%;
+    }
+    .input-field .description{
+        text-align: start;
+        font-size: 9px;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

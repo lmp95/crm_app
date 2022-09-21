@@ -113,12 +113,14 @@
   list-style: none;
   font-size: 12px;
 }
-.breadcrumb div{
+
+.breadcrumb div {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.breadcrumb div span{    
+
+.breadcrumb div span {
   padding: 0px 12px;
   font-size: 10px;
   display: flex;
@@ -130,7 +132,7 @@
   color: #ababab;
 }
 
-.breadcrumb div:nth-last-child(1) span{
+.breadcrumb div:nth-last-child(1) span {
   display: none;
 }
 
@@ -404,7 +406,8 @@ input:required:invalid {
   box-sizing: border-box;
 }
 
-.menu-icon, .close-icon{
+.menu-icon,
+.close-icon {
   display: none;
 }
 
@@ -512,11 +515,10 @@ input:required:invalid {
 }
 
 .form-submit-btn {
-  position: absolute;
-  left: 31%;
+  margin-left: -30%;
 }
 
-.toast-box{
+.toast-box {
   position: fixed;
   top: 5%;
   background-color: var(--white);
@@ -530,45 +532,56 @@ input:required:invalid {
   transform: translateX(-50%);
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
 }
+
 @keyframes fade-in {
-  0%{
+  0% {
     opacity: 0;
   }
-  100%{
+
+  100% {
     opacity: 1;
   }
 }
-.modal-box{
+
+.modal-box {
   z-index: 1001;
   background: var(--white);
-  width: 600px;
+  width: 400px;
   border-radius: 5px;
   padding: 16px;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
   position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
-.modal-box .modal-header{
+
+.modal-box .modal-header {
   display: flex;
   justify-content: space-between;
   padding: 12px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.modal-box .modal-header .modal-close-icon{
+
+.modal-box .modal-header .modal-close-icon {
   cursor: pointer;
 }
-.modal-box .modal-body{
+
+.modal-box .modal-body {
   padding: 12px;
-  min-height: 100px;
+  min-height: 50px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   text-align: start;
 }
-.modal-box .modal-footer{
+
+.modal-box .modal-footer {
   display: flex;
-  padding: 12px;
+  padding: 6px 12px;
   justify-content: end;
   margin-top: 12px;
 }
-.modal-box .modal-footer button{
+
+.modal-box .modal-footer button {
   cursor: pointer;
   border: 1px solid var(--primary);
   background-color: var(--primary);
@@ -577,15 +590,29 @@ input:required:invalid {
   margin-right: 6px;
 }
 
-.modal-box .modal-footer button:nth-child(1){
+.modal-box .modal-footer button:nth-child(1) {
   background-color: var(--white);
   color: var(--primary);
 }
 
-.modal-mask{
+.modal-mask {
   position: fixed;
   inset: 0;
   z-index: 1000;
   height: 100%;
   background-color: #00000073;
+}
+
+.no-data {
+  margin: 24px 0;
+}
+
+.no-data>p {
+  padding-bottom: 12px;
+}
+
+.no-data>svg {
+  width: 72px;
+  height: 72px;
+  color: var(--grey);
 }
