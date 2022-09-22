@@ -25,13 +25,16 @@ function Login() {
     setLoading(true);
     setFormError(initLoginState);
     if (email.length > 0 && password.length > 0) {
-      await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_API_PORT}/v1/user/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email, password: password }),
-      })
+      await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_API_PORT}/v1/user/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: email, password: password }),
+        }
+      )
         .then((response) => {
           if (!response.ok) {
             setError(true);
@@ -90,7 +93,11 @@ function Login() {
           <p className='error-text'>Please fill out this field.</p>
         )}
         <div className='spacer'></div>
-        <button className='btn-primary' onClick={loginHandler} disabled={loading}>
+        <button
+          className='btn-primary'
+          onClick={loginHandler}
+          disabled={loading}
+        >
           Sign In
         </button>
         {error && <ToastBox message='Invalid email or password.' />}

@@ -75,7 +75,7 @@ function CustomerList() {
 
   const onDeleteCustomer = async (customerId: string | null | undefined) => {
     await fetch(
-      `${process.env.REACT_APP_API_BASE_URL}customer/${customerId}`,
+      `${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_API_PORT}/customer/${customerId}`,
       {
         method: 'DELETE',
         headers: {

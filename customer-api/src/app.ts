@@ -26,6 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/v1', routes);
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Application is running on port ${port}.`);
 });
