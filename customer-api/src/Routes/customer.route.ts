@@ -8,4 +8,8 @@ router
   .get(customerController.getCustomerList)
   .post(customerController.createCustomer);
 
+router
+  .route("/:customerId")
+  .delete(customerController.deleteCustomer);
+
 module.exports = router;

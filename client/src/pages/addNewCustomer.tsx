@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../components/InputField';
 import RadioGroup from '../components/RadioGroup';
 import ToastBox from '../components/ToastBox';
 import { customerInterface } from '../interface/customer.interface';
+import { updateBreadcrumb } from '../reducers/breadcurmbReducer';
 
 const initialState: customerInterface = {
   photo: '',
@@ -23,10 +25,14 @@ function AddNewCustomer() {
   const [formErrors, setFormErrors] = useState(initialState);
   const [isValid, setIsValid] = useState(false);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   const onSubmit = async () => {
     setFormErrors(initialState);
+    setLoading(true);
     if (isValid) {
-      await fetch(`${process.env.REACT_APP_API_BASE_URL}/customer/`, {
+      await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_API_PORT}/v1/customer/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,6 +45,7 @@ function AddNewCustomer() {
           } else return response.json();
         })
         .then(() => {
+          dispatch(updateBreadcrumb('Customers'));
           nav('/');
         })
         .catch(() => {
@@ -54,6 +61,7 @@ function AddNewCustomer() {
         }
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -181,7 +189,7 @@ function AddNewCustomer() {
         {formErrors?.gender && (
           <p className='error-text'>Please fill out this field.</p>
         )}
-        <button className='form-submit-btn btn-primary' onClick={onSubmit}>
+        <button disabled={loading} className='form-submit-btn btn-primary' onClick={onSubmit}>
           Sign In
         </button>
       </div>

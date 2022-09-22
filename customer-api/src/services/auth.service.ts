@@ -1,6 +1,3 @@
-import { User } from "../models";
-import bcrypt from "bcrypt";
-import { AuthInterface } from "../interfaces/auth.interface";
 import { userService } from ".";
 import moment from "moment";
 import jwt from 'jsonwebtoken';

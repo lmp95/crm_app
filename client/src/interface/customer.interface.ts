@@ -1,4 +1,5 @@
 export interface customerInterface {
+  _id?: string | null;
   photo: string | null;
   email: string | null;
   password: string | null;

@@ -17,13 +17,15 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [formError, setFormError] = useState(initLoginState);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const nav = useNavigate();
 
   const loginHandler = async () => {
+    setLoading(true);
     setFormError(initLoginState);
     if (email.length > 0 && password.length > 0) {
-      await fetch(`${process.env.REACT_APP_API_BASE_URL}/user/login`, {
+      await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_API_PORT}/v1/user/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,6 +63,7 @@ function Login() {
       password.length <= 0 &&
         setFormError((formError) => ({ ...formError, password: 'error' }));
     }
+    setLoading(false);
   };
 
   return (
@@ -87,7 +90,7 @@ function Login() {
           <p className='error-text'>Please fill out this field.</p>
         )}
         <div className='spacer'></div>
-        <button className='btn-primary' onClick={loginHandler}>
+        <button className='btn-primary' onClick={loginHandler} disabled={loading}>
           Sign In
         </button>
         {error && <ToastBox message='Invalid email or password.' />}

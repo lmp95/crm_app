@@ -1,18 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getCookie } from '../utils/cookie';
+import { jwtVerify } from '../utils/jwtDecode';
 
-// Define a type for the slice state
 interface UserState {
   email: string | null,
   role: string | null,
   token: string | null,
 }
 
-// Define the initial state using that type
 const initialState: UserState = {
   email: localStorage.getItem('email'),
   role: localStorage.getItem('role'),
-  token: getCookie('token'),
+  token: jwtVerify(getCookie('token')),
 };
 
 export const userSlice = createSlice({

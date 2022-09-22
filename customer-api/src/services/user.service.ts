@@ -1,6 +1,6 @@
 import { UserInterface } from "../interfaces/user.interface";
 import { User } from "../models";
-import bcrypt from "bcrypt";
+const bcrypt = require('bcryptjs');
 
 /**
  * Get user list

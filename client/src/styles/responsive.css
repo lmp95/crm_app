@@ -89,13 +89,19 @@
     .close-icon {
         display: block;
     }
-    .form-submit-btn{
+
+    .form-submit-btn {
         margin: 0;
         width: 100%;
     }
-    .input-field .description{
+
+    .input-field .description {
         text-align: start;
         font-size: 9px;
+    }
+
+    .modal-box {
+        width: 75%;
     }
 }
 

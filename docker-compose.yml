@@ -15,7 +15,7 @@ services:
     backend:
       depends_on:
         - mongodb
-      build: ./backend
+      build: ./customer-api
       restart: unless-stopped
       env_file: ./.env
       ports:
@@ -29,13 +29,13 @@ services:
       stdin_open: true
       tty: true
     frontend:
-      build: ./frontend
+      build: ./client
       restart: unless-stopped
       depends_on:
         - backend
       environment:
         - REACT_APP_PORT=$NODE_LOCAL_PORT
       ports:
-        - 3060:3000
+        - 3060:3005
 volumes:
   db:

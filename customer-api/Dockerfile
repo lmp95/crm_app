@@ -10,4 +10,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 3030
+# RUN npm run build
 CMD npm run dev

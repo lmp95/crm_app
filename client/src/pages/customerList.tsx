@@ -29,7 +29,7 @@ function CustomerList() {
 
   const fetchCustomers = async () => {
     await fetch(
-      `${process.env.REACT_APP_API_BASE_URL}/customer/?page=${currentPage}&limit=${limit}&search=${search}&startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`,
+      `${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_API_PORT}/v1/customer/?page=${currentPage}&limit=${limit}&search=${search}&startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`,
       {
         method: 'GET',
         headers: {
@@ -46,7 +46,7 @@ function CustomerList() {
         setCustomers(result);
       })
       .catch((error) => console.log(error));
-    paginationList;
+    paginationList();
   };
 
   useEffect(() => {
@@ -73,8 +73,26 @@ function CustomerList() {
     fetchCustomers();
   };
 
-  const onDeleteCustomer = () => {
-    console.log('Deleted');
+  const onDeleteCustomer = async (customerId: string | null | undefined) => {
+    await fetch(
+      `${process.env.REACT_APP_API_BASE_URL}customer/${customerId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Fail to delete customer');
+        } else return response.json();
+      })
+      .then(() => {
+        showModalHandler();
+        fetchCustomers();
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -210,7 +228,7 @@ function CustomerList() {
             selectedCustomer && selectedCustomer.name
           }?`}
           onClose={showModalHandler}
-          onConfirm={onDeleteCustomer}
+          onConfirm={() => onDeleteCustomer(selectedCustomer._id)}
         />
       )}
     </div>

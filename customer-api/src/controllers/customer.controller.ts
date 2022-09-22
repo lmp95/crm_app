@@ -20,7 +20,17 @@ const createCustomer = async (req: Request, res: Response) => {
   }
 };
 
+const deleteCustomer = async (req: Request, res: Response) => {
+  try {
+    const customer = await customerService.deleteCustomerById(req.params.customerId);
+    res.send(customer);
+  } catch (error) {
+    res.status(400).send({ message: 'Fail to delete customer' });
+  }
+};
+
 export const CustomerController = {
   getCustomerList,
   createCustomer,
+  deleteCustomer
 };

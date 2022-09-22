@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AiFillPlusCircle,
   AiOutlineImport,
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Breadcrumb from '../components/Breadcrumb';
 import ModalBox from '../components/Modal';
+import { updateBreadcrumb } from '../reducers/breadcurmbReducer';
 import { unassignUser } from '../reducers/userReducer';
 import { AppRoutes } from '../routes/route';
 import { RootState } from '../stores/store';
@@ -17,10 +18,10 @@ import { removeCookie } from '../utils/cookie';
 
 function Main() {
   const { email, role } = useSelector((state: RootState) => state.user);
-  const [active, setActive] = useState(0);
+  const breadcrumb = useSelector((state: RootState) => state.breadcrumb);
+  const [active, setActive] = useState('Customers');
   const [showModal, setShowModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [breadcrumb, setBreadcrumb] = useState(['Dashboard', 'Customers']);
   const dispatch = useDispatch();
   const nav = useNavigate();
 
@@ -36,11 +37,14 @@ function Main() {
   };
 
   const changeRouteHandler = (index: number, route: string, name: string) => {
-    breadcrumb.pop();
-    setBreadcrumb([...breadcrumb, name]);
-    setActive(index);
+    dispatch(updateBreadcrumb(name));
+    setActive(name);
     nav(route);
   };
+
+  useEffect(() => {
+    setActive(breadcrumb[1]);
+  }, [breadcrumb]);
 
   const navList = [
     {
@@ -77,7 +81,7 @@ function Main() {
               return (
                 <li
                   key={i}
-                  className={`${active === i && 'active'}`}
+                  className={`${active === item.name && 'active'}`}
                   onClick={() => changeRouteHandler(i, item.route, item.name)}
                 >
                   <span>{item.icon}</span>

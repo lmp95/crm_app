@@ -616,3 +616,8 @@ input:required:invalid {
   height: 72px;
   color: var(--grey);
 }
+
+button:disabled{
+  background-color: var(--grey);
+  pointer-events: none;
+}
